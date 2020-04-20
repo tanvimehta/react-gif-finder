@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+
+.App {
+  min-height: 100vh;
+  text-align: center;
+  background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
+}
+
+.header {
+  text-align: center;
+  padding: 20px 40px 20px 40px;
+}
+
+.title {
+  color: #242424;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.search-form {
+  min-height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-left: 40px;
+}
+
+.search-bar {
+  max-width: 320px;
+  min-width: 220px;
+  width: 45%;
+  border: none;
+  padding: 12px;
+  box-shadow: 0 0 5px 0 #00000040;
+  border-radius: 20px;
+}
+
+.search-button {
+  background-image: linear-gradient(to right, #fc889d 0%, #f56985 19%, #fd868c 60%, #fdb8ae 100%);
+  border: 1px solid #fe9a8b;
+  padding: 12px 15px;
+  color: white;
+  box-shadow: 0 0 5px 0 #00000040;
+  border-radius: 20px;
+  position: relative;
+  right: 43px;
+  cursor: pointer;
+  top: -1px;
+}
+
+.load-button {
+  background-image: linear-gradient(to right, #fc889d 0%, #f56985 19%, #fd868c 60%, #fdb8ae 100%);
+  border: 1px solid #fe9a8b;
+  margin: 20px;
+  padding: 10px;
+  color: white;
+  box-shadow: 0 0 5px 0 #00000040;
+  border-radius: 20px;
+  position: relative;
+  outline: none;
+  right: 43px;
+  cursor: pointer;
+  top: -1px;
+}
+
+.search-bar:focus,
+.search-bar:hover {
+  box-shadow: 0 0 5px 2px #00000040;
+  outline: none;
+}
+
+.search-button:focus {
+  outline: none;
+}
+
+span {
+  font-weight: bold;
+  font-style: italic;
+}
+
+.gif {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
