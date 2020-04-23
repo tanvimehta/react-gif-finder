@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Gif from './Gif/Gif';
-import {saveAs} from 'file-saver';
+import { saveAs } from 'file-saver';
 
 const App = () => {
 
@@ -10,15 +10,18 @@ const App = () => {
   const [gifs, setGif] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('random');
-  const [limit, setLimit] = useState(20);
   const [pos, setPos] = useState(1);
+  const [sty, setSty] = useState('App');
+  const [styName, setStyName] = useState('fa fa-toggle-off');
+  const [styTitle, setTitleName] = useState('title');
+  const [stypDarkMode, setpDarkMode] = useState('');
 
   useEffect(() => {
     getGif();
   }, [query, pos])
 
   const getGif = async () => {
-    const response = await fetch(`https://api.tenor.com/v1/search?q=${query}&key=${API_KEY}&limit=${limit}&pos=${pos}`);
+    const response = await fetch(`https://api.tenor.com/v1/search?q=${query}&key=${API_KEY}&limit=20&pos=${pos}`);
     const data = await response.json();
     setGif(data.results);
   }
@@ -41,23 +44,37 @@ const App = () => {
   }
 
   const loadMore = () => {
-    let temp = limit + pos + 1;
+    let temp = pos + 21;
     setPos(temp);
     setQuery(query);
     setGif([]);
     window.scrollTo(0, 0)
   }
 
+  const toggle = () => {
+    if (styName !== 'fa fa-toggle-off') {
+      setStyName('fa fa-toggle-off');
+      setSty('App');
+      setTitleName('title');
+      setpDarkMode('');
+    } else {
+      setStyName('fa fa-toggle-on');
+      setSty('DarkApp');
+      setTitleName('darkTitle');
+      setpDarkMode('pDarkMode')
+    }
+  }
+
   return (
-    <div className="App">
+    <div className={sty}>
       <header className="header">
-        <h1 className="title" onClick={reload}>React GiF Finder</h1>
+        <h1 className={styTitle} onClick={reload}>React GiF Finder</h1>
         <form onSubmit={getSearch} className="search-from">
           <input className="search-bar" type="text" value={search}
             onChange={updateSearch} placeholder="type here..." />
           <button className="search-button" type="submit">Search</button>
         </form>
-        <p>showing results for <span>{query}</span></p>
+        <p className={stypDarkMode}>showing results for <span className={stypDarkMode}>{query}, </span> &nbsp;<i onClick={toggle} class={styName} aria-hidden="true"></i></p>
       </header>
       {
         gifs.length === 20
@@ -73,7 +90,7 @@ const App = () => {
             </div>
             <button className="load-button" onClick={loadMore}>Load more</button>
           </div>
-          :<img src="https://i.pinimg.com/originals/a4/f2/cb/a4f2cb80ff2ae2772e80bf30e9d78d4c.gif" alt="loader-icon"/>
+          : <img src="https://i.pinimg.com/originals/a4/f2/cb/a4f2cb80ff2ae2772e80bf30e9d78d4c.gif" alt="loader-icon" />
       }
     </div>
   );

@@ -6,6 +6,12 @@
   background-image: linear-gradient(120deg, #84fab0 0%, #8fd3f4 100%);
 }
 
+.DarkApp {
+  min-height: 100vh;
+  text-align: center;
+  background-image: linear-gradient(to right, #434343 0%, black 100%);
+}
+
 .header {
   text-align: center;
   padding: 20px 40px 20px 40px;
@@ -13,6 +19,14 @@
 
 .title {
   color: #242424;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 200;
+  font-size: 3rem;
+  cursor: pointer;
+}
+
+.darkTitle {
+  color: wheat;
   font-family: "Montserrat", sans-serif;
   font-weight: 200;
   font-size: 3rem;
@@ -86,3 +100,6 @@ span {
   flex-wrap: wrap;
 }
 
+.pDarkMode {
+  color: wheat;
+}
