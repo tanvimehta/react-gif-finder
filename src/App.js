@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Gif from './Gif/Gif';
-import { saveAs } from 'file-saver';
 
 const App = () => {
 
@@ -10,20 +9,20 @@ const App = () => {
   const [gifs, setGif] = useState([]);
   const [search, setSearch] = useState('');
   const [query, setQuery] = useState('random');
-  const [pos, setPos] = useState(1);
   const [sty, setSty] = useState('App');
+  const [pos, setPos] = useState(1);
   const [styName, setStyName] = useState('fa fa-toggle-off');
   const [styTitle, setTitleName] = useState('title');
   const [stypDarkMode, setpDarkMode] = useState('');
 
   useEffect(() => {
-    getGif();
-  }, [query, pos])
+    getGif().then(all => setGif(all));
+  }, [query])
 
-  const getGif = async () => {
-    const response = await fetch(`https://api.tenor.com/v1/search?q=${query}&key=${API_KEY}&limit=20&pos=${pos}`);
+  const getGif = async (position = 1) => {
+    const response = await fetch(`https://api.tenor.com/v1/search?q=${query}&key=${API_KEY}&limit=20&pos=${position}`);
     const data = await response.json();
-    setGif(data.results);
+    return data.results;
   }
 
   const updateSearch = e => {
@@ -32,23 +31,18 @@ const App = () => {
 
   const getSearch = e => {
     e.preventDefault();
-    setPos(1);
-    setGif([]);
     setQuery(search);
     setSearch('');
   }
 
   const reload = () => {
-    setPos(1);
     setQuery('random');
   }
 
   const loadMore = () => {
-    let temp = pos + 21;
-    setPos(temp);
-    setQuery(query);
-    setGif([]);
-    window.scrollTo(0, 0)
+    let position = 21 + pos;
+    setPos(position);
+    getGif(position).then(more => setGif([...gifs, ...more]));
   }
 
   const toggle = () => {
@@ -74,10 +68,10 @@ const App = () => {
             onChange={updateSearch} placeholder="type here..." />
           <button className="search-button" type="submit">Search</button>
         </form>
-        <p className={stypDarkMode}>showing results for <span className={stypDarkMode}>{query}, </span> &nbsp;<i onClick={toggle} class={styName} aria-hidden="true"></i></p>
+        <p className={stypDarkMode}>showing results for <span className={stypDarkMode}>{query}, </span> &nbsp; <span className="point"><i onClick={toggle} class={styName} aria-hidden="true"></i></span></p>
       </header>
       {
-        gifs.length === 20
+        gifs.length >= 20
           ?
           <div>
             <div className="gif">

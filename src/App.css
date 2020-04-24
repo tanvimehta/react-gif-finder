@@ -12,6 +12,10 @@
   background-image: linear-gradient(to right, #434343 0%, black 100%);
 }
 
+.point {
+  cursor: pointer;
+}
+
 .header {
   text-align: center;
   padding: 20px 40px 20px 40px;
