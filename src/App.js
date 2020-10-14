@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Gif from './Gif/Gif';
+import InfiniteScroll from 'react-infinite-scroller';
 
 const App = () => {
 
@@ -70,6 +71,12 @@ const App = () => {
         </form>
         <p className={stypDarkMode}>showing results for <span className={stypDarkMode}>{query}, </span> &nbsp; <span className="point"><i onClick={toggle} class={styName} aria-hidden="true"></i></span></p>
       </header>
+      <InfiniteScroll
+        pageStart={0}
+        loadMore={loadMore}
+        hasMore={true || false}
+        loader={<div className="loader" key={0}>Loading ...</div>} 
+        useWindow={false}>
       {
         gifs.length >= 20
           ?
@@ -82,10 +89,10 @@ const App = () => {
                 />
               ))}
             </div>
-            <button className="load-button" onClick={loadMore}>Load more</button>
           </div>
           : <img src="https://i.pinimg.com/originals/a4/f2/cb/a4f2cb80ff2ae2772e80bf30e9d78d4c.gif" alt="loader-icon" />
       }
+      </InfiniteScroll>
     </div>
   );
 }
